@@ -64,9 +64,10 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+   return (Math.floor(Math.random() * 15 + 10) )
 }
+
 
 
 
@@ -86,9 +87,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(takimSkoru,çeyrek){
+  let a = 0;
+  let b = 0;
+  for(let i = 0; i < çeyrek; i++){
+    a += takimSkoru();
+    b += takimSkoru();
+  }
+  const newObj = {
+    "EvSahibi": a,
+    "KonukTakim": b,
+  }
+  return newObj;
 }
+console.log(macSonucu(takimSkoru,4))
 
 
 
@@ -109,8 +121,14 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(takimSkoru) {
+  let a = takimSkoru();
+  let b = takimSkoru();
+  const newObj = {
+    "EvSahibi": a,
+    "KonukTakim": b,
+  }
+  return newObj;
 
 }
 
@@ -146,10 +164,34 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-}
+function skorTabelasi(periyotSkoru,takimSkoru,çeyrek) {
+  let a = 0;
+  let b = 0;
+  let newArr = [];
+  for(let i = 0 ; i < çeyrek; i++){
+    let c = 0;
+    let d = 0;
+    c = takimSkoru();
+    d = takimSkoru();
+    a += c;
+    b += d;
+    let x = `${i + 1}. Periyot: Ev Sahibi ${c} - Konuk Takım ${d}`
+    newArr.push(x)
+  }
+  if(a == b){
+    let c = 0;
+    let d = 0;
+    c = takimSkoru();
+    d = takimSkoru();
+    a += c;
+    b += d;
+    newArr.push(`1. Uzatma: Ev Sahibi ${c} - Konuk Takım ${d}`)
+  }
+  newArr.push(`Maç Sonucu: Ev Sahibi ${a} - Konuk Takım ${b}`)
 
+  return newArr;
+}
+console.log(skorTabelasi(periyotSkoru,takimSkoru,4))
 
 
 
